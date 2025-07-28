@@ -1,1 +1,46 @@
-<p>register works!</p>
+<div class="register-container">
+  <div class="register-card">
+      <div class="register-header">
+          <i class="fas fa-user-plus fa-3x text-primary mb-3"></i>
+          <h2>Create Account</h2>
+          <p>Join our learning platform today</p>
+      </div>
+
+      <form id="registerForm">
+          <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required>
+              <label for="name"><i class="fas fa-user me-2"></i>Full Name</label>
+          </div>
+
+          <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+              <label for="email"><i class="fas fa-envelope me-2"></i>Email Address</label>
+          </div>
+
+          <div class="form-floating mb-3">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password" required minlength="6">
+              <label for="password"><i class="fas fa-lock me-2"></i>Password</label>
+          </div>
+
+          <div class="mb-4">
+              <label for="role" class="form-label"><i class="fas fa-user-tag me-2"></i>Select Your Role</label>
+              <select class="form-select" id="role" name="role" required>
+                  <option value="">Choose your role...</option>
+                  <option value="FORMATEUR">FORMATEUR <span class="role-badge formateur-badge">Instructor</span></option>
+                  <option value="APPRENANT">APPRENANT <span class="role-badge apprenant-badge">Learner</span></option>
+              </select>
+              <div class="form-text mt-2">
+                  <small><i class="fas fa-info-circle me-1"></i>FORMATEUR: Create and manage courses | APPRENANT: Enroll and learn</small>
+              </div>
+          </div>
+
+          <button type="submit" class="btn btn-register">
+              <i class="fas fa-user-plus me-2"></i>Create Account
+          </button>
+      </form>
+
+      <div class="login-link">
+          <p>Already have an account? <a href="#"><i class="fas fa-sign-in-alt me-1"></i>Sign In</a></p>
+      </div>
+  </div>
+</div>
