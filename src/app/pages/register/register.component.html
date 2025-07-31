@@ -6,37 +6,118 @@
           <p>Join our learning platform today</p>
       </div>
 
-      <form id="registerForm">
+      <form id="registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <!-- Name Field -->
           <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required>
+              <input
+                type="text"
+                class="form-control"
+                [class.is-invalid]="registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)"
+                [class.is-valid]="registerForm.get('name')?.valid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)"
+                id="name"
+                name="name"
+                placeholder="Full Name"
+                formControlName="name">
               <label for="name"><i class="fas fa-user me-2"></i>Full Name</label>
+              <div class="invalid-feedback" *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)">
+                <div *ngIf="registerForm.get('name')?.errors?.['required']">
+                  <i class="fas fa-exclamation-circle me-1"></i>Full name is required
+                </div>
+                <div *ngIf="registerForm.get('name')?.errors?.['minlength']">
+                  <i class="fas fa-exclamation-circle me-1"></i>Name must be at least 3 characters long
+                </div>
+              </div>
           </div>
 
+          <!-- Email Field -->
           <div class="form-floating mb-3">
-              <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+              <input
+                type="email"
+                class="form-control"
+                [class.is-invalid]="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)"
+                [class.is-valid]="registerForm.get('email')?.valid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)"
+                id="email"
+                name="email"
+                placeholder="name@example.com"
+                formControlName="email">
               <label for="email"><i class="fas fa-envelope me-2"></i>Email Address</label>
+              <div class="invalid-feedback" *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
+                <div *ngIf="registerForm.get('email')?.errors?.['required']">
+                  <i class="fas fa-exclamation-circle me-1"></i>Email address is required
+                </div>
+                <div *ngIf="registerForm.get('email')?.errors?.['email']">
+                  <i class="fas fa-exclamation-circle me-1"></i>Please enter a valid email address
+                </div>
+              </div>
           </div>
 
+          <!-- Password Field -->
           <div class="form-floating mb-3">
-              <input type="password" class="form-control" id="password" name="password" placeholder="Password" required minlength="6">
+              <input
+                type="password"
+                class="form-control"
+                [class.is-invalid]="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)"
+                [class.is-valid]="registerForm.get('password')?.valid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)"
+                id="password"
+                name="password"
+                placeholder="Password"
+                formControlName="password">
               <label for="password"><i class="fas fa-lock me-2"></i>Password</label>
+              <div class="invalid-feedback" *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
+                <div *ngIf="registerForm.get('password')?.errors?.['required']">
+                  <i class="fas fa-exclamation-circle me-1"></i>Password is required
+                </div>
+                <div *ngIf="registerForm.get('password')?.errors?.['minlength']">
+                  <i class="fas fa-exclamation-circle me-1"></i>Password must be at least 5 characters long
+                </div>
+              </div>
           </div>
 
+          <!-- Role Field -->
           <div class="mb-4">
               <label for="role" class="form-label"><i class="fas fa-user-tag me-2"></i>Select Your Role</label>
-              <select class="form-select" id="role" name="role" required>
+              <select
+                class="form-select"
+                [class.is-invalid]="registerForm.get('role')?.invalid && (registerForm.get('role')?.dirty || registerForm.get('role')?.touched)"
+                [class.is-valid]="registerForm.get('role')?.valid && (registerForm.get('role')?.dirty || registerForm.get('role')?.touched)"
+                id="role"
+                name="role"
+                formControlName="role">
                   <option value="">Choose your role...</option>
                   <option value="FORMATEUR">FORMATEUR <span class="role-badge formateur-badge">Instructor</span></option>
                   <option value="APPRENANT">APPRENANT <span class="role-badge apprenant-badge">Learner</span></option>
               </select>
+              <div class="invalid-feedback" *ngIf="registerForm.get('role')?.invalid && (registerForm.get('role')?.dirty || registerForm.get('role')?.touched)">
+                <div *ngIf="registerForm.get('role')?.errors?.['required']">
+                  <i class="fas fa-exclamation-circle me-1"></i>Please select your role
+                </div>
+              </div>
               <div class="form-text mt-2">
                   <small><i class="fas fa-info-circle me-1"></i>FORMATEUR: Create and manage courses | APPRENANT: Enroll and learn</small>
               </div>
           </div>
 
-          <button type="submit" class="btn btn-register">
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="btn btn-register"
+            [disabled]="registerForm.invalid">
               <i class="fas fa-user-plus me-2"></i>Create Account
           </button>
+
+          <!-- Form Summary Errors (Optional) -->
+          <div class="alert alert-danger mt-3" *ngIf="registerForm.invalid && registerForm.touched">
+            <h6><i class="fas fa-exclamation-triangle me-2"></i>Please fix the following errors:</h6>
+            <ul class="mb-0">
+              <li *ngIf="registerForm.get('name')?.errors?.['required']">Full name is required</li>
+              <li *ngIf="registerForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters</li>
+              <li *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</li>
+              <li *ngIf="registerForm.get('email')?.errors?.['email']">Valid email is required</li>
+              <li *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</li>
+              <li *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 5 characters</li>
+              <li *ngIf="registerForm.get('role')?.errors?.['required']">Role selection is required</li>
+            </ul>
+          </div>
       </form>
 
       <div class="login-link">
