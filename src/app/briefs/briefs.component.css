@@ -1,0 +1,29 @@
+.briefs-container {
+  padding: 20px;
+}
+
+.brief-card {
+  background: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.difficulty {
+  padding: 5px 10px;
+  border-radius: 12px;
+  color: white;
+  font-weight: bold;
+}
+
+.difficulty.beginner {
+  background-color: #a3d8a0;
+}
+
+.difficulty.intermediate {
+  background-color: #f7e49d;
+}
+
+.difficulty.advanced {
+  background-color: #f5b7b1;
+}

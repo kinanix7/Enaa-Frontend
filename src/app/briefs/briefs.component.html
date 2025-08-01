@@ -1,0 +1,14 @@
+<div class="briefs-container">
+  <h2>Briefs Récents</h2>
+  <div class="brief-card" *ngFor="let brief of briefs">
+    <h3>{{ brief.name }}</h3>
+    <p>{{ brief.description }}</p>
+    <span class="difficulty {{ brief.difficulty }}">{{ brief.difficulty }}</span>
+    <p>{{ brief.assigned }} apprenant(s) assigné(s)</p>
+    <div class="actions">
+      <button  class="edit-btn">✏️</button>
+    
+      <button  class="delete-btn">🗑️</button>
+    </div>
+  </div>
+</div>
